@@ -1,0 +1,136 @@
+📌 1. Descripción general del sistema
+
+El sistema será una plataforma web de creación y edición de hojas de vida (CV) asistida por inteligencia artificial, que permitirá a los usuarios:
+
+Generar automáticamente su hoja de vida mediante IA
+Editarla visualmente con herramientas tipo editor gráfico
+Exportarla en formatos profesionales
+✅ 2. Requerimientos Funcionales
+🔹 RF01 – Registro e inicio de sesión
+
+El sistema debe permitir a los usuarios:
+
+Registrarse con correo y contraseña
+Iniciar sesión
+Recuperar contraseña
+🔹 RF02 – Creación de hoja de vida con IA
+
+El sistema debe permitir generar una hoja de vida automáticamente mediante IA:
+
+El usuario podrá iniciar un asistente interactivo
+La IA realizará preguntas como:
+Nombre completo
+Profesión
+Perfil profesional
+Experiencia laboral
+Educación
+Habilidades
+La IA generará automáticamente:
+Texto profesional optimizado
+Estructura organizada del CV
+🔹 RF03 – Generación automática del contenido
+
+El sistema debe:
+
+Analizar las respuestas del usuario
+Generar contenido mejorado (redacción profesional)
+Adaptar el CV según el tipo de perfil (ej: estudiante, senior, freelancer)
+🔹 RF04 – Editor visual tipo Canva
+
+El sistema debe permitir editar la hoja de vida con un editor gráfico:
+
+Arrastrar y soltar elementos (drag & drop)
+Editar textos directamente
+Cambiar:
+Colores
+Tipografías
+Tamaños
+Reorganizar secciones
+🔹 RF05 – Plantillas prediseñadas
+
+El sistema debe ofrecer:
+
+Diferentes plantillas de CV
+Estilos:
+Profesional
+Creativo
+Minimalista
+Posibilidad de cambiar de plantilla sin perder información
+🔹 RF06 – Edición manual del contenido
+
+El usuario podrá:
+
+Editar cualquier texto generado por la IA
+Agregar nuevas secciones
+Eliminar secciones
+🔹 RF07 – Guardado automático
+
+El sistema debe:
+
+Guardar automáticamente los cambios del usuario
+Permitir guardar múltiples versiones del CV
+🔹 RF08 – Exportación de la hoja de vida
+
+El sistema debe permitir exportar el CV en:
+
+PDF
+Imagen (PNG/JPG)
+Documento editable (opcional: Word)
+🔹 RF09 – Vista previa en tiempo real
+
+El sistema debe:
+
+Mostrar cambios en tiempo real mientras el usuario edita
+Simular cómo se verá el CV final
+🔹 RF10 – Recomendaciones inteligentes (IA)
+
+La IA debe:
+
+Sugerir mejoras en:
+Redacción
+Palabras clave
+Formato
+Adaptar el CV a ofertas laborales específicas (opcional avanzado)
+🔹 RF11 – Historial de hojas de vida
+
+El usuario podrá:
+
+Ver CVs creados anteriormente
+Editarlos nuevamente
+Duplicarlos
+🔹 RF12 – Modo guiado (para principiantes)
+
+El sistema debe ofrecer:
+
+Un flujo paso a paso
+Indicaciones claras para usuarios sin experiencia
+🔹 RF13 – Personalización avanzada
+
+El usuario podrá:
+
+Insertar:
+Foto de perfil
+Iconos
+Líneas decorativas
+Ajustar diseño libremente
+🔹 RF14 – Compatibilidad multidispositivo
+
+El sistema debe:
+
+Funcionar en:
+Computador
+Tablet
+Móvil
+🧠 3. Requerimientos funcionales de IA (clave en tu proyecto)
+🔹 RF-IA01 – Asistente conversacional
+La IA debe interactuar como chat
+Debe hacer preguntas dinámicas según respuestas
+🔹 RF-IA02 – Generación de texto profesional
+Convertir respuestas simples en textos formales
+Ejemplo:
+Usuario: "trabajé en ventas"
+IA: "Experiencia en gestión de ventas y atención al cliente..."
+🔹 RF-IA03 – Optimización del CV
+Detectar errores
+Sugerir mejoras
+Ajustar tono profesional
