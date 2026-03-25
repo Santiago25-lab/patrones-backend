@@ -7,14 +7,14 @@ import com.patrones.backend.model.Role;
 import com.patrones.backend.model.User;
 import com.patrones.backend.repository.UserRepository;
 import com.patrones.backend.security.JwtService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -22,28 +22,43 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
+
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already taken");
         }
 
-        var user = User.builder()
-                .fullName(request.getFullName())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .build();
+        User user = new User(
+                null,
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getFullName(),
+                Role.USER,
+                LocalDateTime.now()
+        );
         
         userRepository.save(user);
         
-        var jwtToken = jwtService.generateToken(user);
-        
-        return AuthResponse.builder()
-                .token(jwtToken)
-                .id(user.getId())
-                .email(user.getEmail())
-                .fullName(user.getFullName())
+        var userDetails = org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .authorities(user.getRole().name())
                 .build();
+        
+        String jwtToken = jwtService.generateToken(userDetails);
+        
+        return new AuthResponse(
+                jwtToken,
+                user.getId(),
+                user.getEmail(),
+                user.getFullName()
+        );
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -54,16 +69,22 @@ public class AuthService {
                 )
         );
         
-        var user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
                 
-        var jwtToken = jwtService.generateToken(user);
-        
-        return AuthResponse.builder()
-                .token(jwtToken)
-                .id(user.getId())
-                .email(user.getEmail())
-                .fullName(user.getFullName())
+        var userDetails = org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .authorities(user.getRole().name())
                 .build();
+        
+        String jwtToken = jwtService.generateToken(userDetails);
+        
+        return new AuthResponse(
+                jwtToken,
+                user.getId(),
+                user.getEmail(),
+                user.getFullName()
+        );
     }
 }
